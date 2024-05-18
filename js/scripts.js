@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    // Ensure this code block runs only once
+    if (window.timelineLoaded) return;
+    window.timelineLoaded = true;
+
     // Load DJ Logos from JSON
     $.getJSON('data/logos.json', function (logos) {
         const $logoContainer = $('.logo-container');
@@ -35,7 +39,7 @@ $(document).ready(function () {
 
             // Click to show large image in modal
             $eventImage.on('click', function () {
-                showImageModal(event.image);
+                lightbox.open(event.image);
             });
 
             $contentDiv.append($eventTitle, $eventDate, $eventImage);
@@ -43,19 +47,4 @@ $(document).ready(function () {
             $timelineContainer.append($eventDiv);
         });
     });
-
-    // Show Image Modal
-    function showImageModal(imageSrc) {
-        const $modal = $('<div>', { class: 'image-modal', css: { display: 'flex' } });
-        const $modalContent = $('<div>', { class: 'image-modal-content' });
-        const $img = $('<img>', { src: imageSrc, alt: 'Event Image' });
-
-        $modalContent.append($img);
-        $modal.append($modalContent);
-        $('body').append($modal);
-
-        $modal.on('click', function () {
-            $modal.remove();
-        });
-    }
 });
