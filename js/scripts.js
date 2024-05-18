@@ -1,7 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize Materialize components
-    M.AutoInit();
-
     // Load DJ Logos from JSON
     fetch('data/logos.json')
         .then(response => response.json())
@@ -46,14 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     showImageModal(event.image);
                 });
 
-                const eventDetails = document.createElement('div');
-                eventDetails.className = 'event-details';
-                eventDetails.innerHTML = `<p><strong>Location:</strong> ${event.location}</p>`;
-
                 contentDiv.appendChild(eventTitle);
                 contentDiv.appendChild(eventDate);
                 contentDiv.appendChild(eventImage);
-                contentDiv.appendChild(eventDetails);
                 eventDiv.appendChild(contentDiv);
                 timelineContainer.appendChild(eventDiv);
             });
