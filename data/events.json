@@ -1,0 +1,37 @@
+[
+    {
+        "seq": 1,
+        "name": "Ultra Music Festival",
+        "date": "2023-03-24",
+        "location": "Miami, FL",
+        "image": "https://umfworldwide.com/wp-content/uploads/2022/09/Ultra-Japan-Phase-3-Billing-V1-1.png"
+    },
+    {
+        "seq": 2,
+        "name": "Coachella",
+        "date": "2023-04-14",
+        "location": "Indio, CA",
+        "image": "https://example.com/event4.jpg"
+    },
+    {
+        "seq": 3,
+        "name": "EDC Las Vegas",
+        "date": "2023-05-19",
+        "location": "Las Vegas, NV",
+        "image": "https://example.com/event3.jpg"
+    },
+    {
+        "seq": 4,
+        "name": "Tomorrowland",
+        "date": "2023-07-21",
+        "location": "Boom, Belgium",
+        "image": "https://example.com/event2.jpg"
+    },
+    {
+        "seq": 5,
+        "name": "Burning Man",
+        "date": "2023-08-27",
+        "location": "Black Rock City, NV",
+        "image": "https://example.com/event5.jpg"
+    }
+]
