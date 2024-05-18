@@ -61,7 +61,7 @@ section h2 {
     align-items: center;
 }
 
-.logo-container .logo-wrapper:hover {
+logo-container .logo-wrapper:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
@@ -163,6 +163,7 @@ section h2 {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    overflow: hidden;
 }
 
 .image-modal-content {
@@ -172,6 +173,7 @@ section h2 {
 .image-modal img {
     max-width: 90%;
     max-height: 90%;
+    object-fit: contain;
 }
 
 .event-details {
