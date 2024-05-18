@@ -33,5 +33,19 @@
         "date": "2023-08-27",
         "location": "Black Rock City, NV",
         "image": "https://example.com/event5.jpg"
+    },
+    {
+        "seq": 6,
+        "name": "Burning Man",
+        "date": "2023-08-27",
+        "location": "Black Rock City, NV",
+        "image": "https://example.com/event5.jpg"
+    },
+    {
+        "seq": 7,
+        "name": "Burning Man",
+        "date": "2023-08-27",
+        "location": "Black Rock City, NV",
+        "image": "https://example.com/event5.jpg"
     }
 ]

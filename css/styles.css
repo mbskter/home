@@ -95,6 +95,7 @@ section h2 {
     position: relative;
     padding: 20px 0;
     width: 100%;
+    overflow: hidden; /* 允许子元素溢出 */
 }
 
 .timeline-container {
@@ -123,6 +124,7 @@ section h2 {
     background-color: inherit;
     border-radius: 6px;
     animation: fadeInUp 0.5s;
+    margin-bottom: 20px; /* 增加事件之间的间距 */
 }
 
 .timeline-event.left {
@@ -164,30 +166,6 @@ section h2 {
     transition: transform 0.3s, box-shadow 0.3s;
     object-fit: contain;
     position: relative;
-}
-
-.image-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    overflow: hidden;
-}
-
-.image-modal-content {
-    position: relative;
-}
-
-.image-modal img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
 }
 
 .hover-location {
