@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #000;
+    background-color: #0c0c0c;
     color: #fff;
     margin: 0;
     padding: 0;
@@ -16,7 +16,7 @@ body {
 }
 
 header {
-    background: #000;
+    background: #0c0c0c;
     padding: 15px 0;
     text-align: center;
 }
@@ -25,6 +25,25 @@ nav .brand-logo {
     font-size: 2.5em;
     font-weight: 700;
     color: #fff;
+}
+
+#hero {
+    background: url('path/to/your/hero-image.jpg') no-repeat center center/cover;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+#hero .hero-content h1 {
+    font-size: 4em;
+    margin: 0;
+}
+
+#hero .hero-content p {
+    font-size: 1.5em;
 }
 
 section {
@@ -88,7 +107,7 @@ section h2 {
     content: '';
     position: absolute;
     width: 6px;
-    background-color: #fff;
+    background-color: #007BFF;
     top: 0;
     bottom: 0;
     left: 50%;
@@ -174,7 +193,7 @@ section h2 {
 }
 
 footer {
-    background: #000;
+    background: #0c0c0c;
     padding: 20px 0;
     color: #fff;
     text-align: center;
