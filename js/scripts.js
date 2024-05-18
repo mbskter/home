@@ -1,75 +1,61 @@
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready(function () {
     // Load DJ Logos from JSON
-    fetch('data/logos.json')
-        .then(response => response.json())
-        .then(logos => {
-            const logoContainer = document.querySelector('.logo-container');
-            logos.forEach(logo => {
-                const div = document.createElement('div');
-                div.className = 'logo-wrapper';
-
-                const img = document.createElement('img');
-                img.src = logo.src;
-                img.alt = 'DJ Logo';
-
-                div.appendChild(img);
-                logoContainer.appendChild(div);
-            });
+    $.getJSON('data/logos.json', function (logos) {
+        const $logoContainer = $('.logo-container');
+        logos.forEach(logo => {
+            const $div = $('<div>', { class: 'logo-wrapper col-3 col-md-2' });
+            const $img = $('<img>', { src: logo.src, alt: 'DJ Logo' });
+            $div.append($img);
+            $logoContainer.append($div);
         });
+    });
 
     // Load Events from JSON
-    fetch('data/events.json')
-        .then(response => response.json())
-        .then(events => {
-            const timelineContainer = document.querySelector('.timeline-container');
-            events.sort((a, b) => new Date(a.date) - new Date(b.date));
-            events.forEach((event, index) => {
-                const eventDiv = document.createElement('div');
-                eventDiv.className = `timeline-event ${index % 2 === 0 ? 'left' : 'right'}`;
+    $.getJSON('data/events.json', function (events) {
+        const $timelineContainer = $('.timeline-container');
+        events.sort((a, b) => a.seq - b.seq); // Sort by sequence number
 
-                const contentDiv = document.createElement('div');
-                contentDiv.className = 'content';
+        events.forEach((event, index) => {
+            const $eventDiv = $('<div>', { class: `timeline-event ${index % 2 === 0 ? 'left' : 'right'}` });
+            const $contentDiv = $('<div>', { class: 'content' });
+            const $eventTitle = $('<h3>').text(event.name);
+            const $eventDate = $('<p>').text(event.date);
+            const $eventImage = $('<img>', { src: event.image, alt: event.name, 'data-location': event.location });
 
-                const eventTitle = document.createElement('h3');
-                eventTitle.textContent = event.name;
+            // Mouse hover to show location
+            $eventImage.hover(
+                function () {
+                    const $locationDiv = $('<div>', { class: 'hover-location' }).text(event.location);
+                    $(this).after($locationDiv);
+                },
+                function () {
+                    $(this).next('.hover-location').remove();
+                }
+            );
 
-                const eventDate = document.createElement('p');
-                eventDate.textContent = event.date;
-
-                const eventImage = document.createElement('img');
-                eventImage.src = event.image;
-                eventImage.alt = event.name;
-                eventImage.addEventListener('click', () => {
-                    showImageModal(event.image);
-                });
-
-                contentDiv.appendChild(eventTitle);
-                contentDiv.appendChild(eventDate);
-                contentDiv.appendChild(eventImage);
-                eventDiv.appendChild(contentDiv);
-                timelineContainer.appendChild(eventDiv);
+            // Click to show large image in modal
+            $eventImage.on('click', function () {
+                showImageModal(event.image);
             });
+
+            $contentDiv.append($eventTitle, $eventDate, $eventImage);
+            $eventDiv.append($contentDiv);
+            $timelineContainer.append($eventDiv);
         });
+    });
 
     // Show Image Modal
     function showImageModal(imageSrc) {
-        const modal = document.createElement('div');
-        modal.className = 'image-modal';
-        modal.style.display = 'flex';
+        const $modal = $('<div>', { class: 'image-modal', css: { display: 'flex' } });
+        const $modalContent = $('<div>', { class: 'image-modal-content' });
+        const $img = $('<img>', { src: imageSrc, alt: 'Event Image' });
 
-        const modalContent = document.createElement('div');
-        modalContent.className = 'image-modal-content';
+        $modalContent.append($img);
+        $modal.append($modalContent);
+        $('body').append($modal);
 
-        const img = document.createElement('img');
-        img.src = imageSrc;
-        img.alt = 'Event Image';
-
-        modalContent.appendChild(img);
-        modal.appendChild(modalContent);
-        document.body.appendChild(modal);
-
-        modal.addEventListener('click', () => {
-            modal.remove();
+        $modal.on('click', function () {
+            $modal.remove();
         });
     }
 });
