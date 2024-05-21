@@ -1,6 +1,10 @@
-$(document).ready(function() {
-    // Load DJ logos from JSON
-    $.getJSON('data/logos.json', function(logos) {
+$(document).ready(function () {
+    // Ensure this code block runs only once
+    if (window.timelineLoaded) return;
+    window.timelineLoaded = true;
+
+    // Load DJ Logos from JSON
+    $.getJSON('data/logos.json', function (logos) {
         const $logoContainer = $('.logo-container');
         logos.forEach(logo => {
             const $div = $('<div>', { class: 'logo-wrapper col-6 col-sm-4 col-md-3 col-lg-2' });
@@ -16,10 +20,7 @@ $(document).ready(function() {
         events.sort((a, b) => a.seq - b.seq); // Sort by sequence number
 
         events.forEach((event, index) => {
-            const $eventDiv = $('<div>', {
-                class: `timeline-event ${index % 2 === 0 ? 'left' : 'right'}`,
-                'data-aos': index % 2 === 0 ? 'fade-right' : 'fade-left' // AOS animation
-            });
+            const $eventDiv = $('<div>', { class: `timeline-event ${index % 2 === 0 ? 'left' : 'right'}` });
             const $contentDiv = $('<div>', { class: 'content' });
             const $eventTitle = $('<h3>').text(event.name);
             const $eventDate = $('<p>').text(event.date);
@@ -45,8 +46,6 @@ $(document).ready(function() {
             $eventDiv.append($contentDiv);
             $timelineContainer.append($eventDiv);
         });
-
-        AOS.refresh(); // Refresh AOS after dynamically adding elements
     });
 
     AOS.init();

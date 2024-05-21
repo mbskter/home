@@ -28,7 +28,7 @@ nav .brand-logo {
 }
 
 #hero {
-    background: url('../data/danny-howe-bn-D2bCvpik-unsplash.jpg') no-repeat center center/cover;
+    background: url('path/to/your/hero-image.jpg') no-repeat center center/cover;
     height: 80vh;
     display: flex;
     align-items: center;
