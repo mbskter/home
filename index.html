@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     
     <!-- SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
@@ -90,7 +90,59 @@
     <script src="js/scripts.js"></script>
     
     <script>
-        AOS.init();
+        $(document).ready(function() {
+            // Load DJ logos from JSON
+            $.getJSON('data/logos.json', function(logos) {
+                const $logoContainer = $('.logo-container');
+                logos.forEach(logo => {
+                    const $div = $('<div>', { class: 'logo-wrapper col-6 col-sm-4 col-md-3 col-lg-2' });
+                    const $img = $('<img>', { src: logo.src, alt: 'DJ Logo' });
+                    $div.append($img);
+                    $logoContainer.append($div);
+                });
+            });
+
+            // Load Events from JSON
+            $.getJSON('data/events.json', function (events) {
+                const $timelineContainer = $('.timeline-container');
+                events.sort((a, b) => a.seq - b.seq); // Sort by sequence number
+
+                events.forEach((event, index) => {
+                    const $eventDiv = $('<div>', {
+                        class: `timeline-event ${index % 2 === 0 ? 'left' : 'right'}`,
+                        'data-aos': index % 2 === 0 ? 'fade-right' : 'fade-left' // AOS animation
+                    });
+                    const $contentDiv = $('<div>', { class: 'content' });
+                    const $eventTitle = $('<h3>').text(event.name);
+                    const $eventDate = $('<p>').text(event.date);
+                    const $eventImage = $('<img>', { src: event.image, alt: event.name, 'data-location': event.location });
+
+                    // Mouse hover to show location
+                    $eventImage.hover(
+                        function () {
+                            const $locationDiv = $('<div>', { class: 'hover-location' }).text(event.location);
+                            $(this).after($locationDiv);
+                        },
+                        function () {
+                            $(this).next('.hover-location').remove();
+                        }
+                    );
+
+                    // Click to show large image in modal
+                    $eventImage.on('click', function () {
+                        lightbox.open(event.image);
+                    });
+
+                    $contentDiv.append($eventTitle, $eventDate, $eventImage);
+                    $eventDiv.append($contentDiv);
+                    $timelineContainer.append($eventDiv);
+                });
+
+                AOS.refresh(); // Refresh AOS after dynamically adding elements
+            });
+
+            AOS.init();
+        });
     </script>
 </body>
 </html>

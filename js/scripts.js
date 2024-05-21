@@ -3,7 +3,7 @@ $(document).ready(function() {
     $.getJSON('data/logos.json', function(logos) {
         const $logoContainer = $('.logo-container');
         logos.forEach(logo => {
-            const $div = $('<div>', { class: 'logo-wrapper col-3 col-md-2' });
+            const $div = $('<div>', { class: 'logo-wrapper col-6 col-sm-4 col-md-3 col-lg-2' });
             const $img = $('<img>', { src: logo.src, alt: 'DJ Logo' });
             $div.append($img);
             $logoContainer.append($div);
@@ -48,4 +48,6 @@ $(document).ready(function() {
 
         AOS.refresh(); // Refresh AOS after dynamically adding elements
     });
+
+    AOS.init();
 });
